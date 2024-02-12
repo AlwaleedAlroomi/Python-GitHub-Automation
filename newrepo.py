@@ -9,7 +9,7 @@ token = env("gt")
 message = sys.argv[1]
 path = sys.argv[2]
 reponame = path.split('/')
-changename = input("Enter new repository name(no spaces in the name you can use - instead)\nor leave it blank and it will be the same as the folder name: ")
+changename = input(f"Enter new repository name(no spaces in the name you can use - instead)\nor leave it blank and it will be {reponame[-1]}: ")
 
 github = Github(token)
 user = github.get_user()
@@ -26,12 +26,18 @@ commands = [
     'git add *',
     f'git commit -m "{message}"',
     'git branch -M main',
-    f'git remote add origin https://github.com/{login}/{repo.name}.git',
+    f'git remote add origin git@github.com:{login}/{repo.name}.git',
     'git push -u origin main',
     'code .',
 ]
 
-for c in commands:
-    os.system(c)
+# Check if the folder contains a README.md file or not
+if not os.path.exists(path + "/README.md"):
+    for c in commands:
+        os.system(c)
+else:
+    commands.pop(0)
+    for c in commands:
+        os.system(c)
 
 print('Pushing data Done!')
