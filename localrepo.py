@@ -16,7 +16,7 @@ commands = [
     'git add *',
     'git branch -M main',
     f'git commit -m "{message}"',
-    # 'git push origin main'
+    'git push origin main'
 ]
 
 for c in commands:
