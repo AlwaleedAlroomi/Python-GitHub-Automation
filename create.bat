@@ -1,9 +1,9 @@
 @echo off
 
 set pa=%CD%
-set msg=%1
+set "msg=%~1"
 rem it will check if the user entered a folder msg 
-if "%1" == "" (
+if "%msg%" == "" (
     rem if there is no msg it will print error
     echo "error you did not enter a message for the commit"
 rem if the user entered a msg it will skip the if condition and enter else condition
